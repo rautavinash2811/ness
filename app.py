@@ -21,7 +21,7 @@ app = Flask(__name__)
 HOST_NAME = 'localhost'
 DATABASE_NAME = 'ness'
 PORT = 5432
-PASSWORD = 'avi123'
+PASSWORD = 'postgres'
 DATABASE_USER = 'postgres'
 
 conn = None
@@ -43,8 +43,8 @@ def create_table():
             percentage TEXT
         )
     """)
-    conn.commit()   # <-- Important: commit the transaction
-    cur.close()     # <-- Clean up
+    conn.commit()   # It's Imp it commit the transaction
+    cur.close()     # Clean up
     conn.close()
 
 
@@ -66,7 +66,18 @@ def insert_student(name,email,phone,qualification,board,passing_year,percentage)
     cur.close()
     conn.close()
 
+def fetching():
+    conn = get_connection()
+    cur = conn.cursor()
+    cur.execute("""select * from student_info""")
+    
+    data = cur.fetchall()
 
+    # conn.commit()
+    cur.close()
+    conn.close()
+
+    return data
 
 @app.route('/')
 def personal():
@@ -94,6 +105,13 @@ def mydata():
 
     return render_template('submited_data.html',qualification = qualification,board = brd,p_year = passing_year,percentage = percentage,name = name,email=email,phone = phone)
 
+@app.route('/show_data',methods = ['POST'])
+def database_data():
+
+    student = fetching()
+
+    return render_template('show_data.html',student = student)
+
 
 @app.route('/thankyou',methods = ['POST'])
 def last():
@@ -102,3 +120,20 @@ def last():
 if __name__=="__main__":
     create_table()
     app.run(debug=True)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+#python -m flask --version
