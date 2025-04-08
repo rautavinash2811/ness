@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search</title>
+</head>
+<body>
+    <form action="/search_data" method="post">
+        <h1>Searching Data from Database</h1>
+        <hr>
+        <label>Enter the Name</label>
+        <input type="text" name="search_name" required>
+        <hr><hr>
+        <input type="submit" value="Search">
+    </form>
+
+    {% if data %}
+        <p><strong>ID:</strong> {{ data[0] }}</p>
+        <p><strong>Name:</strong> {{ data[1] }}</p>
+        <p><strong>Email:</strong> {{ data[2] }}</p>
+        <p><strong>Phone:</strong> {{ data[3] }}</p>
+        <p><strong>Qualification:</strong> {{ data[4] }}</p>
+        <p><strong>Board:</strong> {{ data[5] }}</p>
+        <p><strong>Passing Year:</strong> {{ data[6] }}</p>
+        <p><strong>Percentage:</strong> {{ data[7] }}</p>
+
+
+        <form action="/delete_data" method="post">
+            <input type="hidden" name="id" value="{{ data[0] }}">
+            <input type="submit" value="Delete This Record">
+        </form>
+
+        <form action="/update" method="post">
+            <input type="hidden" name="id1" value="{{ data[0] }}">
+            <input type="submit" value="Update This Record">
+        </form>
+    {% else %}
+        <p>Data Not Found</p>
+    {% endif %}
+</body>
+</html>

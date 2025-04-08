@@ -112,6 +112,59 @@ def database_data():
 
     return render_template('show_data.html',student = student)
 
+@app.route('/search_data', methods=['GET', 'POST'])
+def search_data():
+    if request.method == 'POST':
+        searchName = request.form.get('search_name')  #use .get() to not come KeyError
+        conn = get_connection()
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM student_info WHERE name = %s", (searchName,))
+        data = cur.fetchone()
+        cur.close()
+        conn.close()
+        return render_template('search_data.html', data=data)
+    return render_template('search_data.html', data=None)
+
+
+@app.route('/delete_data', methods=['POST'])
+def delete_data():
+    student_id = request.form['id']
+    conn = get_connection()
+    cur = conn.cursor()
+    cur.execute("DELETE FROM student_info WHERE id = %s", (student_id,))
+    conn.commit()
+    cur.close()
+    conn.close()
+    return "Record Deleted Successfully"
+
+@app.route('/update',methods=['POST'])
+def update_data1():
+    student_id1 = request.form['id1']
+    return render_template('update.html',student_id1 = student_id1)
+
+@app.route('/update_data', methods=['POST'])
+def update_data():
+
+    student_id1 = request.form['id1']
+    name1 = request.form['name1']
+    phone1 = request.form['phone1']
+    email1 = request.form['email1']
+
+    conn = get_connection()
+    cur = conn.cursor()
+    cur.execute(
+        "UPDATE student_info SET name=%s, phone=%s, email=%s WHERE id=%s",
+        (name1, phone1, email1, student_id1)
+    )
+    conn.commit()  # due to This changes will affect in database
+    cur.close()
+    conn.close()
+    return "Updated Record Successfully"
+
+
+    # conn = get_connection()
+    # cur = conn.cursor()
+    # cur.execute("UPDATE student_info set ")
 
 @app.route('/thankyou',methods = ['POST'])
 def last():
