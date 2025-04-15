@@ -2,57 +2,101 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search</title>
+    <title>Educational Information</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .sd {
+            margin-top: 30px;
+        }
+        .form-inline {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 25px;
+        }
+        table {
+            margin: 25px;
+        }
+        .center-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 60px; /* Top margin added here */
+            margin-bottom: 40px;
+        }
+    </style>
 </head>
 <body>
-    <form action="/search_data" method="post">
-        <h1>Searching Data from Database</h1>
-        <hr>
-        <label>Enter the Name</label>
-        <input type="text" name="search_name" required>
-        <hr><hr>
-        <input type="submit" value="Search">
-    </form>
 
-    <form action ="/thankyou" method = "post">
-        <input type ="submit" value = "Next">
+    <center><h1 class="sd">Searching Data From Database</h1></center>
+    <hr>
+
+    <!-- Search Form -->
+    <form action="/search_data" method="post" class="form-inline">
+        <label for="name" class="form-label">Enter the Name:</label>
+        <input type="text" class="form-control" name="search_name" required>
+        <input type="submit" class="btn btn-primary" value="Search">
     </form>
 
     {% if data %}
-        <p><strong>ID:</strong> {{ data[0] }}</p>
-        <p><strong>Name:</strong> {{ data[1] }}</p>
-        <p><strong>Email:</strong> {{ data[2] }}</p>
-        <p><strong>Phone:</strong> {{ data[3] }}</p>
-        <p><strong>Qualification:</strong> {{ data[4] }}</p>
-        <p><strong>Board:</strong> {{ data[5] }}</p>
-        <p><strong>Passing Year:</strong> {{ data[6] }}</p>
-        <p><strong>Percentage:</strong> {{ data[7] }}</p>
+        <table class="table table-bordered">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Qualification</th>
+                <th>Board</th>
+                <th>Passing Year</th>
+                <th>Percentage</th>
+            </tr>
+            <tr>
+                <td>{{ data[0] }}</td>
+                <td>{{ data[1] }}</td>
+                <td>{{ data[2] }}</td>
+                <td>{{ data[3] }}</td>
+                <td>{{ data[4] }}</td>
+                <td>{{ data[5] }}</td>
+                <td>{{ data[6] }}</td>
+                <td>{{ data[7] }}</td>
+            </tr>
+        </table>
 
+        <div class="center-buttons">
+            <!-- Delete Form -->
+            <form action="/delete_data" method="post">
+                <input type="hidden" name="id" value="{{ data[0] }}">
+                <input type="submit" class="btn btn-danger" value="Delete This Record">
+            </form>
 
-        <form action="/delete_data" method="post">
-            <input type="hidden" name="id" value="{{ data[0] }}">
-            <input type="submit" value="Delete This Record">
-        </form>
+            <!-- Update Form -->
+            <form action="/updatedata" method="post">
+                <input type="hidden" name="id1" value="{{ data[0] }}">
+                <input type="hidden" name="name1" value="{{ data[1] }}">
+                <input type="hidden" name="email1" value="{{ data[2] }}">
+                <input type="hidden" name="phone1" value="{{ data[3] }}">
+                <input type="hidden" name="qualification1" value="{{ data[4] }}">
+                <input type="hidden" name="board1" value="{{ data[5] }}">
+                <input type="hidden" name="passing_year1" value="{{ data[6] }}">
+                <input type="hidden" name="percentage1" value="{{ data[7] }}">
+                <input type="submit" class="btn btn-warning" value="Update This Record">
+            </form>
 
-        <form action="/updatedata" method="post">
-            <input type="hidden" name="id1" value="{{ data[0] }}">
-            <input type="hidden" name="name1" value="{{ data[1] }}">
-            <input type="hidden" name="email1" value="{{ data[2] }}">
-            <input type="hidden" name="phone1" value="{{ data[3] }}">
-            <input type="hidden" name="qualification1" value="{{ data[4] }}">
-            <input type="hidden" name="board1" value="{{ data[5] }}">
-            <input type="hidden" name="passing_year1" value="{{ data[6] }}">
-            <input type="hidden" name="percentage1" value="{{ data[7] }}">
-
-            <input type="submit" value="Update This Record">
-        </form>
-
-        <form action ="/thankyou" method = "post">
-            <input type ="submit" value = "Next">
-        </form>
+            <!-- Next Button -->
+            <form action="/thankyou" method="post">
+                <input type="submit" class="btn btn-success" value="Next">
+            </form>
+        </div>
     {% else %}
-        <p>Data Not Found</p>
+        <p class="text-center mt-4">Data Not Found</p>
+        
+        <div class="center-buttons">
+            <form action="/thankyou" method="post">
+                <input type="submit" class="btn btn-success" value="Next">
+            </form>
+        </div>
     {% endif %}
+
 </body>
 </html>

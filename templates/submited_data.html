@@ -2,65 +2,69 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data</title>
+    <title>Educational Information</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        th,td
-        {
+        table {
+            border-collapse: collapse;
+            margin: 20px auto;
+            width: 90%;
+        }
+        th, td {
             border: 2px solid black;
-            padding: 3px;
+            padding: 10px;
             text-align: center;
         }
-        table
-        {
-            border-collapse: collapse;
-
+        h1 {
+            margin-top: 30px;
+        }
+        #but {
+            margin-top: 50px;
         }
     </style>
 </head>
 <body>
-   <form action="/show_data" method="post">
-    <center><h1>Personal Information Without Database</h1></center>
 
-    <center>
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Email Address</th>
-            <th>Phone Number</th>
-        </tr>
-        <tr>
-            <td>{{name}}</td>
-            <td>{{email}}</td>
-            <td>{{phone}}</td>
-        </tr>
-    </table>
-    </center>
+    <form action="/show_data" method="post">
+        <div class="container">
 
+            <h1 class="text-center">Personal Information Without Database</h1>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Email Address</th>
+                    <th>Phone Number</th>
+                </tr>
+                <tr>
+                    <td>{{ name }}</td>
+                    <td>{{ email }}</td>
+                    <td>{{ phone }}</td>
+                </tr>
+            </table>
 
-    <hr>
-    <center><h1>Education Information Without Database</h1></center>
-    <hr>
+            <hr>
 
-    <center>
-    <table>
-        <tr>
-            <th>Highest Qualification</th>
-            <th>University/Board</th>
-            <th>Passing Year</th>
-            <th>Percentage/CGPA</th>
-        </tr>
-        <tr>
-            <td>{{qualification}}</td>
-            <td>{{board}}</td>
-            <td>{{p_year}}</td>
-            <td>{{percentage}}</td>
-        </tr>
-    </table>
-    </center>
+            <h1 class="text-center">Education Information Without Database</h1>
+            <table>
+                <tr>
+                    <th>Highest Qualification</th>
+                    <th>University/Board</th>
+                    <th>Passing Year</th>
+                    <th>Percentage/CGPA</th>
+                </tr>
+                <tr>
+                    <td>{{ qualification }}</td>
+                    <td>{{ board }}</td>
+                    <td>{{ p_year }}</td>
+                    <td>{{ percentage }}</td>
+                </tr>
+            </table>
 
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary" id="but">Next</button>
+            </div>
+        </div>
+    </form>
 
-    <button type="submit" class="btn btn-primary">Next</button>
-   </form>
 </body>
-</html></Q>
+</html>

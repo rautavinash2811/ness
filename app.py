@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request
+from flask import Flask,render_template,request,redirect,url_for
 import psycopg2
 app = Flask(__name__)
 # @app.route('/')
@@ -136,6 +136,7 @@ def delete_data():
     cur.close()
     conn.close()
     return "Record Deleted Successfully"
+
 
 @app.route('/updatedata',methods=['POST'])
 def update_data1():
