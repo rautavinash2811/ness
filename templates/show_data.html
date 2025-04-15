@@ -13,13 +13,14 @@
             <h2 class="text-center mb-4">Personal Information Fetched from Database</h2>
             <table class="table table-bordered">
                 <tr>
+                    <th>Sr. No</th>
                     <th>Name</th>
                     <th>Email Address</th>
-                    <th>Phone Number</th>
+                    
                 </tr>
                 {% for i in student %}
                 <tr>
-                    <td>{{ i[0] }}</td>      
+                    <td>{{loop.index}}</td>  
                     <td>{{ i[1] }}</td>     
                     <td>{{ i[2] }}</td>
                 </tr>
@@ -29,6 +30,7 @@
             <h2 class="text-center mt-5 mb-4">Educational Information Fetched from Database</h2>
             <table class="table table-bordered">
                 <tr>
+                    <th>Phone Number</th>
                     <th>Highest Qualification</th>
                     <th>University/Board</th>
                     <th>Passing Year</th>
@@ -40,6 +42,7 @@
                     <td>{{ i[4] }}</td>
                     <td>{{ i[5] }}</td>
                     <td>{{ i[6] }}</td>
+                    <td>{{i[7]}}</td>
                 </tr>
                 {% endfor %}
             </table>

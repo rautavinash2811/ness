@@ -190,3 +190,7 @@ if __name__=="__main__":
 
 #Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 #python -m flask --version
+
+#sudo apt install libpq-dev python3-dev build-essential  #pip install psycopg2
+# the above command is used to take psycopg2
+#if we are not giving it then gives error.
