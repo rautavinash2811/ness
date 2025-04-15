@@ -15,6 +15,10 @@
         <input type="submit" value="Search">
     </form>
 
+    <form action ="/thankyou" method = "post">
+        <input type ="submit" value = "Next">
+    </form>
+
     {% if data %}
         <p><strong>ID:</strong> {{ data[0] }}</p>
         <p><strong>Name:</strong> {{ data[1] }}</p>
@@ -31,9 +35,21 @@
             <input type="submit" value="Delete This Record">
         </form>
 
-        <form action="/update" method="post">
+        <form action="/updatedata" method="post">
             <input type="hidden" name="id1" value="{{ data[0] }}">
+            <input type="hidden" name="name1" value="{{ data[1] }}">
+            <input type="hidden" name="email1" value="{{ data[2] }}">
+            <input type="hidden" name="phone1" value="{{ data[3] }}">
+            <input type="hidden" name="qualification1" value="{{ data[4] }}">
+            <input type="hidden" name="board1" value="{{ data[5] }}">
+            <input type="hidden" name="passing_year1" value="{{ data[6] }}">
+            <input type="hidden" name="percentage1" value="{{ data[7] }}">
+
             <input type="submit" value="Update This Record">
+        </form>
+
+        <form action ="/thankyou" method = "post">
+            <input type ="submit" value = "Next">
         </form>
     {% else %}
         <p>Data Not Found</p>

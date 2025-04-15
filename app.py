@@ -137,10 +137,28 @@ def delete_data():
     conn.close()
     return "Record Deleted Successfully"
 
-@app.route('/update',methods=['POST'])
+@app.route('/updatedata',methods=['POST'])
 def update_data1():
     student_id1 = request.form['id1']
-    return render_template('update.html',student_id1 = student_id1)
+    student_name1 = request.form['name1']
+    student_email1 = request.form['email1']
+    student_phone1 = request.form['phone1']
+    student_quali1 = request.form['qualification1']
+    student_board1 = request.form['board1']
+    student_passing_year1 = request.form['passing_year1']
+    student_percentage1 = request.form['percentage1']
+
+    global list1
+
+    list1 = ["ID","Name","Email","Phone","Qualification","Student Board","Passing Year","Student Percentage"]
+
+    global dict1
+    dict1 = {'sid1':student_id1,'sname1':student_name1,'semail1':student_email1,
+            'sphone1':student_phone1,'sq1':student_quali1,'sb1':student_board1,
+            'spy1':student_passing_year1,'sp1':student_percentage1}
+
+
+    return render_template('update.html',mydict = dict1,student_id1 = student_id1,list1=list1)
 
 @app.route('/update_data', methods=['POST'])
 def update_data():
@@ -172,7 +190,9 @@ def last():
 
 if __name__=="__main__":
     create_table()
-    app.run(debug=True)
+    app.run(debug=True)   #second parameter we can we can give port
+                          #if debug = True then we can see error on browser and no need to run 
+                          # server multiple times it automatically saves
 
 
 
